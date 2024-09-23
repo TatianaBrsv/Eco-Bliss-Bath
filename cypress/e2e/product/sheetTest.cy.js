@@ -6,7 +6,7 @@ describe("API Testing with Dynamic Product Selection", () => {
         const id = req.url.split("/").pop();
         return {
           id: parseInt(id),
-          name: `Product ${id}`,
+          
         };
       },
     }).as("getProduct");
@@ -21,7 +21,6 @@ describe("API Testing with Dynamic Product Selection", () => {
       });
 
     cy.wait("@getProduct").then((interception) => {
-      console.log(interception);
       expect(interception).to.exist;
       expect(interception.response.statusCode).to.eq(200);
     });
