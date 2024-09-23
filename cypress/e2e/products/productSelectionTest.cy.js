@@ -6,7 +6,6 @@ describe("API Testing with Dynamic Product Selection", () => {
         const id = req.url.split("/").pop();
         return {
           id: parseInt(id),
-          
         };
       },
     }).as("getProduct");
