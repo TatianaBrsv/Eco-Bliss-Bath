@@ -2,7 +2,7 @@ describe("Requête pour récupérer la liste des produits du panier", () => {
   // Étape 1:
   before(() => {
     const testToken =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjcxMTk1NzYsImV4cCI6MTcyNzEyMzE3Niwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.ljc_Z4HyVyajIZREz2cbcbqfcAMmloqCjI6ZG5Esq6KBoyb_20CvktN0dgjslq59vppgfIvABlkde00vu0i_f1vFKsnMQyRRFNwvVBk6g21F9BkDThFrCSlkh4e7bkr1OC3LMQeTfgnvaFr5db32nReLqLOCPgrP-1kcj5023AlfDro9XBW83e7cgm4bOINaO3NbNUcTNiKGuprasqtCxUdc4Gx7_rFBujE2OcKdGGQx8uWCz_vcbqARJAd5YTVddXo2H-sZcLZGZNpcVGUW6mVGhJYGO5fLk_r-vJOfwox3dtEIzfuOUbZBlRgTDFB7AdoLLbEntU6hsFdqKW2X5A";
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjczNjY0NTIsImV4cCI6MTcyNzM3MDA1Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.lPf9qz81FgSfggmXIhZd7K54fmjbBETREbQDfPUQfZim9mjHwy1uLHU6BQ3WGxH8eeG_MVv-a-BVhtygkr4vyg42Iv5-o1vA7eRIZe4HpC5U16t6Qcd5OekQ_l6gs7L__xmsuq4gBN7qHhS5m3XcLHnpYNdV_MTNDaxvvc0Gmitux6rdime-uevSYgSVacroEetsGGFc5iI_zM4sh_ribMGnfJlCrZF1IIOEh3CPGWvfT-8shd8EWXq0G4ON-Dpx0vJkjOPoNR5gDlQzVTuAO96TO7pO0jONnRagO4DrCOo9t6jqLtBMQV2aLZoF8hx-YKpUI5B62jIgEmp3wIsnKg";
     window.localStorage.setItem("user", testToken);
   });
 
