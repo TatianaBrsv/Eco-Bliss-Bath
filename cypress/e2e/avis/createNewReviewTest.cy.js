@@ -1,4 +1,4 @@
-describe("Requête pour récupérer la liste des produits du panier", () => {
+describe("Requête pour envoyer un avis valide", () => {
   before(() => {
     const testToken =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjcyMDQzMjMsImV4cCI6MTcyNzIwNzkyMywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.bbjrxFNN-ZprGnKLJMQ-TjG8hd52M0Dub0uocdKCMBJ6gkjaMVSuYhjUP7bCRdHB9sNEUNIudFxGBja6k1C9XHOexPmo5o3ssK799BOFyfovvt8cqz4fcoNzAWJTNLalzBuD4NCq5nxoJNSpZYVb1VgzRV072r8DM8D6qq1qNWisGgCl_7tXpE3TsEJUn2zpPeCe3Jbf6oDL4ILnbJIt1sOnRUyRkxkOVvs5xtPL_CLmhAaz1TdVyFQofn_GRX_AJltlGrijgscuTbxSw0vhYThPao9JaAwB2xBHHF5gIey3AHpcSCEucPvFOfwHYqUAw29IgTb6jDjAj70RiwU4dg";
