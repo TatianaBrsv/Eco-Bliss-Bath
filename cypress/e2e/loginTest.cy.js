@@ -1,6 +1,6 @@
 describe("Registration Form Test", () => {
   it("Should fill the registration form and be redirected on success", () => {
-    cy.intercept("POST", "**/login").as("loginRequest");
+    cy.intercept("POST", "http://localhost:8081/login").as("loginRequest");
 
     cy.visit("http://localhost:8080/#/login");
 
@@ -13,5 +13,10 @@ describe("Registration Form Test", () => {
     cy.wait("@loginRequest").its("response.statusCode").should("eq", 200);
 
     cy.url().should("eq", "http://localhost:8080/#/");
+
+    cy.window().then((window) => {
+      const token = window.localStorage.getItem('user'); 
+      expect(token).to.exist; 
   });
+});
 });
