@@ -6,6 +6,7 @@ describe("Vérification de l'impossibilité d'ajouter un produit avec un stock n
   });
 
   it("Impossible d'ajouter un produit au panier avec un stock nul ou négatif (produit avec l'ID 3)", () => {
+    cy.intercept("POST", "/cart").as("addToCart");
     cy.visit("http://localhost:8080/#/products/3");
 
     cy.get('[data-cy="detail-product-stock"]').should(($stock) => {
@@ -16,8 +17,10 @@ describe("Vérification de l'impossibilité d'ajouter un produit avec un stock n
     // Essayer d'ajouter un produit en rupture de stock
     cy.get('[data-cy="detail-product-quantity"]').clear().type("1");
 
-    // Essayer sur le bouton "Ajouter au panier"
     cy.get('[data-cy="detail-product-add"]').click();
+
+    //Vérifie que la requête n'a pas été effectuée
+    cy.wait("@addToCart").its("response.statusCode").should("not.eq", 200);
 
     // Vérifier que notre panier est toujours vide
     cy.get(".cart-line-quantity").should("contain", "0");
