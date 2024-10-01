@@ -4,13 +4,14 @@
   "description": "1. Téléchargez ou clonez le dépôt 2. Depuis un terminal ouert dans le dossier du projet, lancer la commande : `sudo docker-compose up --build` 3. Ouvrez le site depuis la page http://localhost:8080",
   "main": "cypress.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:report": "cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,reportFilename=report.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^13.14.2"
+    "cypress": "^13.14.2",
+    "mochawesome": "^7.1.3"
   }
 }
