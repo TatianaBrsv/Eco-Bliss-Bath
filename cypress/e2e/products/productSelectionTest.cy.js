@@ -107,7 +107,7 @@ describe("API Testing with Dynamic Product Selection", () => {
       
       req.reply({
         statusCode: 200,
-        body: productsData[id] || {} // Если id не найден, возвращаем пустой объект
+        body: productsData[id] || {}
       });
     }).as("getProduct");
 
