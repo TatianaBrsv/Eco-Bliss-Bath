@@ -17,6 +17,7 @@ describe("Registration Form Test", () => {
     cy.window().then((window) => {
       const token = window.localStorage.getItem('user'); 
       expect(token).to.exist; 
+      cy.get('[data-cy="nav-link-cart"]').should("be.visible");
   });
 });
 });
