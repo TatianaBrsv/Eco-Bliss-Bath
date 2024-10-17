@@ -1,12 +1,14 @@
 describe("Vérification de l'impossibilité d'ajouter un produit avec un stock nul ou négatif au panier pour un utilisateur enregistré", () => {
-  before(() => {
+  beforeEach(() => {
     const testToken =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3Mjc2MTU3OTgsImV4cCI6MTcyNzYxOTM5OCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.VVQ-IibCtNLtsfzBb8zZb9AjY2q1bN6fx7p8QtukdYUwbxCk5fczMTB7cl876rpy23K6A5UjAAPfQPV7Dibsehq_i8R0-1ntfmSg1IOzdeW4IDfTW6-7seXcu4mWNEAToYd6dXdRup7gjH1VE5W8v-PEaIzM08DQ1-6XJTENjYJlOsY7Ee3jC2wbVmE1i9lxZkWLXuBKIZAiM0P8cMajd3-JBJuM9hwDHaNyUJ21tlO_fWUz3faYhmvEPW0ymrkCaYfChHXaPH0jh6L1D1gf2Z1WteLSFldXi2YVYF-k86Z-dHmnF4Kp0A3gAsqXpnku5alG8ZvUmYmCwfJT7wt8gw";
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjkxNjE1MjUsImV4cCI6MTcyOTE2NTEyNSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.iM-kuqy-jqV9-cmudiATtnSG1-IzYQkfQv1EsFKhEav0sUwKOpctQ9nHn0SzKBgqkadj5Pu0sPGB6Xpf3sfLv3lO2D8oPkUBRPYKgrnWOFa4iOFwgZVVVO_lcdPzOUKlVec1RlcZGQU40oCbukJ_PaOJwMKYBO0sruJ4o4dSsJJ7RAy9h9fk0lQ94ZygpvrfQNvduJBDDzJy69MoH_oB_JFmEZpaqwCp9XQmcrjrUVUpqgnUelklOHOfV2MRGWgooOiwifLHy9A_uEYjoCUt4V1HFZ6m5qRbo_L9_BXaVfK6DZ8hZdVHZWJGHV9voz-jwRV9_GM2imcSuk-uQCKuTQ";
     window.localStorage.setItem("user", testToken);
+
+    cy.intercept("PUT", "http://localhost:8081/orders/add").as("addToPanier");
   });
 
   it("Impossible d'ajouter un produit au panier avec un stock nul ou négatif (produit avec l'ID 3)", () => {
-    cy.intercept("PUT", "http://localhost:8081/orders/add").as("addToPanier");
+   
     cy.visit("http://localhost:8080/#/products/3");
 
     // Vérifier le stock et transformer le texte en nombre

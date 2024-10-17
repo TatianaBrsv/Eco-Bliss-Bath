@@ -1,18 +1,20 @@
 describe("Requête pour récupérer la liste des produits du panier", () => {
   // Étape 1:
-  before(() => {
+  beforeEach(() => {
     const testToken =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjczNjY0NTIsImV4cCI6MTcyNzM3MDA1Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.lPf9qz81FgSfggmXIhZd7K54fmjbBETREbQDfPUQfZim9mjHwy1uLHU6BQ3WGxH8eeG_MVv-a-BVhtygkr4vyg42Iv5-o1vA7eRIZe4HpC5U16t6Qcd5OekQ_l6gs7L__xmsuq4gBN7qHhS5m3XcLHnpYNdV_MTNDaxvvc0Gmitux6rdime-uevSYgSVacroEetsGGFc5iI_zM4sh_ribMGnfJlCrZF1IIOEh3CPGWvfT-8shd8EWXq0G4ON-Dpx0vJkjOPoNR5gDlQzVTuAO96TO7pO0jONnRagO4DrCOo9t6jqLtBMQV2aLZoF8hx-YKpUI5B62jIgEmp3wIsnKg";
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjkxNjExNzIsImV4cCI6MTcyOTE2NDc3Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.A5V0FBesy7KppLzAccLkA3MOhaBzm5YfwEaflczmuGRKzxPQtazpXLdgvXIZw-cOuiQc5JvF15M-GQFp6Yvi0_JnXIqq0Bl4dilheMMmuHU76V6cQyWqPLBvqdfeAAZJz3Qjz8IuH-d453rJ6Op0RMtQ-AFfbVv6oWNtFPAS4EwsDxjVfvQM5p23tUKv5DmOCxsnjBPA8e8cxJ5e_FoK7CPHeLVk5w-QQg8V7DtU6JNJZadURU81SorePr4K8HSUgWtEcSX_PIXUk2xt6b7Kirgp3FHJim3wpmd-MLYLOlbfXOsTneGoViXSkuxdZsWNkIvI5MzKHjDlrq01hZ1bHA";
     window.localStorage.setItem("user", testToken);
+
+    cy.intercept("GET", "http://localhost:8081/orders").as("getOrder");
   });
 
   // Étape 2:
-  it("Devrait accéder aux détails de la commande", () => {
+  it("API Test: Devrait retourner la réponse correcte pour les détails des produits présents dans le panier", () => {
     cy.visit("http://localhost:8080/#/");
 
     cy.get('[data-cy="nav-link-cart"]').should("be.visible").click();
 
-    cy.intercept("GET", "http://localhost:8081/orders").as("getOrder");
+    
 
     cy.wait("@getOrder").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);

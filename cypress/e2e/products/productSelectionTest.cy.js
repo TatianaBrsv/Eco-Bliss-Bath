@@ -1,6 +1,5 @@
 describe("API Testing with Dynamic Product Selection", () => {
-  it("Should send a GET request for the selected product when navigating to its page", () => {
-    
+  beforeEach(() => {
     cy.intercept("GET", /http:\/\/localhost:8081\/products\/\d+/, (req) => {
       const id = req.url.split("/").pop();
       
@@ -110,8 +109,8 @@ describe("API Testing with Dynamic Product Selection", () => {
         body: productsData[id] || {}
       });
     }).as("getProduct");
-
-   
+  });
+    it("Should send a GET request for the selected product when navigating to its page", () => {
     cy.visit("http://localhost:8080/products");
 
     

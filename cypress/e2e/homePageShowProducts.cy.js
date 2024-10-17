@@ -1,5 +1,5 @@
 describe("Affichage des produits sur la page d’accueil", () => {
-  it("Devrait afficher 3 produits aléatoires sur la page principale", () => {
+  beforeEach(() => {
     cy.intercept("GET", /http:\/\/localhost:8081\/products\/\d+/, (req) => {
       const id = req.url.split("/").pop();
 
@@ -123,8 +123,9 @@ describe("Affichage des produits sur la page d’accueil", () => {
         body: productsData[id] || {},
       });
     }).as("getProduct");
+  });
 
-    // Vérifier que trois produits sont présents sur la page d'accueil
+  it("Devrait afficher 3 produits aléatoires sur la page principale", () => {
     cy.visit("http://localhost:8080/#");
     cy.get('[data-cy="product-home"]').should("have.length", 3);
 

@@ -1,11 +1,11 @@
 describe("Smoke Test for Product Card", () => {
   before(() => {
     const testToken =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjczNjY0NTIsImV4cCI6MTcyNzM3MDA1Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.lPf9qz81FgSfggmXIhZd7K54fmjbBETREbQDfPUQfZim9mjHwy1uLHU6BQ3WGxH8eeG_MVv-a-BVhtygkr4vyg42Iv5-o1vA7eRIZe4HpC5U16t6Qcd5OekQ_l6gs7L__xmsuq4gBN7qHhS5m3XcLHnpYNdV_MTNDaxvvc0Gmitux6rdime-uevSYgSVacroEetsGGFc5iI_zM4sh_ribMGnfJlCrZF1IIOEh3CPGWvfT-8shd8EWXq0G4ON-Dpx0vJkjOPoNR5gDlQzVTuAO96TO7pO0jONnRagO4DrCOo9t6jqLtBMQV2aLZoF8hx-YKpUI5B62jIgEmp3wIsnKg";
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjkxNTQ1OTAsImV4cCI6MTcyOTE1ODE5MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.ZVLtlTwYmXHUM66Qk7Hf0KkCFFAMboXzjgH8h69XoWHbRrK7YbZo9zrtyWPcNXSZY6etY2KtbqnDlHL2cDPKqQRovQkbrYCtwVDgTwJZ8UHl1MK7ftJrjt86qe9ND18cwRng0Rai8Cu5Y-Fzd4FmsTOqEQknT0WsVPdgvqZ64W4_gJsllxAdF92xvP4RMB_E4RYhVz4W6hzpRcI_2FjCR40bx5fqTTGt44kvIFt56YQGlDZntszMD2I0NGy4TuUpwBtgddR0nSV91FBz0HIMaI9pIZJkZd6hI51U6SX2uZjscPzvBcDq69Q6aOIyZidBgHwrOIp8SsK27DrUVIp0qA";
     window.localStorage.setItem("user", testToken);
   });
 
-  it('should display product availability field on the product card', () => {
+  it('Vérifiez la présence du champ de disponibilité du produit', () => {
     cy.visit("http://localhost:8080/products");
 
     cy.get('[data-cy="product-home-link"]')
