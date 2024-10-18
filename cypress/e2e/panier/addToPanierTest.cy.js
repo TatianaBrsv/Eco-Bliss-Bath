@@ -1,13 +1,23 @@
 describe("Ajouter un produit au panier", () => {
     beforeEach(() => {
-      const testToken =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjkxNzYwNDIsImV4cCI6MTcyOTE3OTY0Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.hihLlfnm9DQB7s1_XXXeqxUM3On0lcgzvAlkxcJHv9ScSe2ez58Kcv5c0ZMxDiDu4NrSo4KjsqCTDvK2WekU8sP_q8lvY2oD4G56bS9B2qrEQqGKxPa9NciOtc500S6RGsjMr8BfdSnNUrLoVTyWgjEeNNbY5U162ieHG6evadL6oUSk4tK5nzqAB5X_4osFNIVHNg4Qrer7r0NvNfjbVKV3SggzTejbqPY5f8o3Pbgg6hP6R8heize3gM2kW0YTpkjvpv1EBR8CxOII-KiHrov6HFKP0vuWf8QcbRPNg6n2gFo34c6hU5x333SOgzu_ISXM0O6wcbipgSZMmpIxHA";
-      window.localStorage.setItem("user", testToken);
+      
+      //Connexion sur le site
+      cy.intercept("POST", "http://localhost:8081/login").as("loginRequest");
+
+      cy.visit("http://localhost:8080/#/login");
+  
+      cy.get('[data-cy="login-input-username"]').type("test2@test.fr");
+  
+      cy.get('[data-cy="login-input-password"]').type("testtest");
+  
+      cy.get('[data-cy="login-submit"]').click();
+  
+      cy.wait("@loginRequest").its("response.statusCode").should("eq", 200);
   
       cy.intercept("PUT", "http://localhost:8081/orders/add").as("addToPanier");
     });
 
-    it("Ajouter un produit avec le stock supériuere à 1", () => {
+    it("Ajouter un produit avec le stock supériuer à 1", () => {
         cy.visit("http://localhost:8080/#/products/5"); //stock du produit est 22
         
         let initialStock;
@@ -142,7 +152,7 @@ cy.get('@addToPanier').should('not.exist');
     });
 
     it("Impossible d'ajouter un produit avec une quantité égale à 0", () => {
-      cy.visit("http://localhost:8080/#/products/5");
+      cy.visit("http://localhost:8080/#/products/10");
 
 // Simuler un clic sur le bouton "Ajouter"
 const quantityToAdd = 0;

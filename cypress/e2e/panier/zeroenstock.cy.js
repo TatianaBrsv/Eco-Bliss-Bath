@@ -1,8 +1,17 @@
 describe("Vérification de l'impossibilité d'ajouter un produit avec un stock nul ou négatif au panier pour un utilisateur enregistré", () => {
   beforeEach(() => {
-    const testToken =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjkxNjE1MjUsImV4cCI6MTcyOTE2NTEyNSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.iM-kuqy-jqV9-cmudiATtnSG1-IzYQkfQv1EsFKhEav0sUwKOpctQ9nHn0SzKBgqkadj5Pu0sPGB6Xpf3sfLv3lO2D8oPkUBRPYKgrnWOFa4iOFwgZVVVO_lcdPzOUKlVec1RlcZGQU40oCbukJ_PaOJwMKYBO0sruJ4o4dSsJJ7RAy9h9fk0lQ94ZygpvrfQNvduJBDDzJy69MoH_oB_JFmEZpaqwCp9XQmcrjrUVUpqgnUelklOHOfV2MRGWgooOiwifLHy9A_uEYjoCUt4V1HFZ6m5qRbo_L9_BXaVfK6DZ8hZdVHZWJGHV9voz-jwRV9_GM2imcSuk-uQCKuTQ";
-    window.localStorage.setItem("user", testToken);
+    //Connexion sur le site
+    cy.intercept("POST", "http://localhost:8081/login").as("loginRequest");
+
+    cy.visit("http://localhost:8080/#/login");
+
+    cy.get('[data-cy="login-input-username"]').type("test2@test.fr");
+
+    cy.get('[data-cy="login-input-password"]').type("testtest");
+
+    cy.get('[data-cy="login-submit"]').click();
+
+    cy.wait("@loginRequest").its("response.statusCode").should("eq", 200);
 
     cy.intercept("PUT", "http://localhost:8081/orders/add").as("addToPanier");
   });

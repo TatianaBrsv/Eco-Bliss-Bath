@@ -1,8 +1,17 @@
 describe("Smoke Test for Product Page", () => {
   before(() => {
-    const testToken =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjkxNTQ1OTAsImV4cCI6MTcyOTE1ODE5MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.ZVLtlTwYmXHUM66Qk7Hf0KkCFFAMboXzjgH8h69XoWHbRrK7YbZo9zrtyWPcNXSZY6etY2KtbqnDlHL2cDPKqQRovQkbrYCtwVDgTwJZ8UHl1MK7ftJrjt86qe9ND18cwRng0Rai8Cu5Y-Fzd4FmsTOqEQknT0WsVPdgvqZ64W4_gJsllxAdF92xvP4RMB_E4RYhVz4W6hzpRcI_2FjCR40bx5fqTTGt44kvIFt56YQGlDZntszMD2I0NGy4TuUpwBtgddR0nSV91FBz0HIMaI9pIZJkZd6hI51U6SX2uZjscPzvBcDq69Q6aOIyZidBgHwrOIp8SsK27DrUVIp0qA";
-    window.localStorage.setItem("user", testToken);
+     //Connexion sur le site
+     cy.intercept("POST", "http://localhost:8081/login").as("loginRequest");
+
+     cy.visit("http://localhost:8080/#/login");
+ 
+     cy.get('[data-cy="login-input-username"]').type("test2@test.fr");
+ 
+     cy.get('[data-cy="login-input-password"]').type("testtest");
+ 
+     cy.get('[data-cy="login-submit"]').click();
+ 
+     cy.wait("@loginRequest").its("response.statusCode").should("eq", 200);
   });
 
   it('vérifier la présence du bouton "Ajouter au panier"', () => {

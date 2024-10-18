@@ -1,9 +1,18 @@
 describe("Requête pour envoyer un avis valide", () => {
   before(() => {
-    const testToken =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjkxNjIwODEsImV4cCI6MTcyOTE2NTY4MSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.WeTf3yA8aU_lwA16ggufGZIAVA33VORHa9IRmMsFF6ynF3Tka-CGC1j_eaae7y_Btzt5JsYbvKtX9msM5KUduY9IWDMTU17aAGulumw_dQKo1toB58dlGcBer3Ej5BWmwZt0dlVlAZy9fbEQeY34cciQ7fXclMdUZzpGqTTHH_UT866gklP5MvRGAaPixbknNR94SyGjt_N6D_-PH40R_yOwa_9LD0kJAcLwAUCpxIPowKYEPne6F1a3qgASMT1HFIFh-7uTVv7pVUZdPZspCM7o2VIMA_JCRGs8ABFvUkPjtaPM8AAOrIArI_D-x1rabPWDuC1s9uLRsZ-8AkOS4g";
-    window.localStorage.setItem("user", testToken);
+    //Connexion sur le site
+    cy.intercept("POST", "http://localhost:8081/login").as("loginRequest");
 
+    cy.visit("http://localhost:8080/#/login");
+
+    cy.get('[data-cy="login-input-username"]').type("test2@test.fr");
+
+    cy.get('[data-cy="login-input-password"]').type("testtest");
+
+    cy.get('[data-cy="login-submit"]').click();
+
+    cy.wait("@loginRequest").its("response.statusCode").should("eq", 200);
+    
     cy.intercept({
       method: "POST",
       url: "http://localhost:8081/reviews",
