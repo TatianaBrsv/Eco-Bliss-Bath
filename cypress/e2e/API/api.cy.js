@@ -1,4 +1,4 @@
-describe("Requête pour récupérer la liste des produits du panier", () => {
+describe("Tests d'API", () => {
     const apiUrl = "http://localhost:8081";
     
     beforeEach(() => {
@@ -18,7 +18,7 @@ describe("Requête pour récupérer la liste des produits du panier", () => {
     });
   
     it("API Test: Devrait retourner la réponse correcte pour les détails des produits présents dans le panier", () => {
-    
+    //Avant l'execution du test il faut avoir minimum un produit dans le panier
       cy.request({
         method: "GET",
         url: `${apiUrl}/orders`,
